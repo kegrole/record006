@@ -1,0 +1,48 @@
+{
+  "target": "demo/sample.elf",
+  "elf": {
+    "magic": "7f 45 4c 46",
+    "class": "ELF64",
+    "data": "little",
+    "e_type": "ET_EXEC",
+    "e_machine": "EM_X86_64",
+    "e_entry": 4198400,
+    "e_phoff": 64,
+    "e_phnum": 4,
+    "e_shoff": 640,
+    "e_shnum": 9,
+    "e_shstrndx": 1
+  },
+  "summary": {
+    "total_checks": 5,
+    "passed": 1,
+    "failed": 4
+  },
+  "checks": [
+    {
+      "name": "nx",
+      "passed": false,
+      "detail": "PT_GNU_STACK is executable: flags=7 (0x7, RWX); PF_X=0x1 is set."
+    },
+    {
+      "name": "pie",
+      "passed": false,
+      "detail": "PIE not enabled: e_type=2 (ET_EXEC) is not ET_DYN."
+    },
+    {
+      "name": "relro",
+      "passed": true,
+      "detail": "Full RELRO: PT_GNU_RELRO present and lazy binding disabled (DT_BIND_NOW present; DT_FLAGS_1=0x1 carries DF_1_NOW(0x1))."
+    },
+    {
+      "name": "dangerous_symbols",
+      "passed": false,
+      "detail": "Dangerous imported symbol(s) found in .dynsym: strcpy."
+    },
+    {
+      "name": "not_stripped",
+      "passed": false,
+      "detail": "Symbol table not stripped: .symtab (sh_type=SHT_SYMTAB) contains 2 entries (offset=584, size=48)."
+    }
+  ]
+}
